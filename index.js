@@ -1,4 +1,3 @@
-import JSConfetti from "js-confetti";
 const word = "santa";
 const wordArr = word.split("");
 const wordDisplay = document.getElementById("word-display");
@@ -21,25 +20,22 @@ function renderGuess(arr) {
 
 function handleGuess(e) {
   e.preventDefault();
-  /**
-   * Debug Challenge:
-   * 1. There are loads of problems with the
-   *    code below. Find them and fix them!
-   **/
 
-  /* bugs begin 🦠*/
   let currentState = [];
-  let input = document.getElementById("users-input");
-  let guess = input.id;
-  const guessArr = guess.split(" ");
-  wordArr.foreach((letter) => {
-    if (letter === guessArr[""]) {
-      currentState.push(letter);
-    } else {
-      currentState.push(letter);
-    }
-  });
-  /* bugs end 🦠*/
+  let input = document.getElementById("user-input");
+  let guess = input.value.trim();
+
+  if (guess !== "") {
+    const guessArr = guess.split("");
+
+    wordArr.forEach((letter, index) => {
+      if (letter === guessArr[index]) {
+        currentState.push(letter);
+      } else {
+        currentState.push("-");
+      }
+    });
+  }
   renderGuess(currentState);
   checkWin(guess);
   input.value = "";
